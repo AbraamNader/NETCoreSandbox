@@ -32,9 +32,9 @@ namespace NETCoreSandbox.ViewModels
     {
         public DataProfile()
         {
-            CreateMap<Models.Data, DataViewModel>();
             CreateMap<Models.Translation, TranslationViewModel>();
-            CreateMap<List<Models.Translation>, List<TranslationViewModel>>();
+            //CreateMap<List<Models.Translation>, List<TranslationViewModel>>();
+            CreateMap<Models.Data, DataViewModel>();
         }
     }
 }

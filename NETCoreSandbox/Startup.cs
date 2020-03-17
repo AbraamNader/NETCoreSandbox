@@ -34,9 +34,9 @@ namespace NETCoreSandbox
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddAutoMapper(mapper => {
-                mapper.AddCollectionMappers();
+                //mapper.AddCollectionMappers();
                 mapper.AddProfile(typeof(ViewModels.DataProfile));
-                mapper.UseEntityFrameworkCoreModel<DataContext>(services);
+                //mapper.UseEntityFrameworkCoreModel<DataContext>(services);
             }, AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers().AddNewtonsoftJson();

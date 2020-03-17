@@ -33,6 +33,14 @@ namespace NETCoreSandbox.Controllers
             return DataContext.Data;
         }
 
+        [HttpGet("ProjectTo")]
+        [EnableQuery]
+        public IQueryable<DataViewModel> GetProjectTo()
+        {
+            return DataContext.Data.ProjectTo<DataViewModel>(Mapper.ConfigurationProvider);
+        }
+
+        // https://localhost:44308/api/data/ViewModel?$expand=translations
         [HttpGet("ViewModel")]
         [EnableQuery]
         public IQueryable<DataViewModel> GetViewModel()
@@ -43,13 +51,15 @@ namespace NETCoreSandbox.Controllers
             });
         }
 
+        // https://localhost:44308/api/data/applyto?$expand=translations
         [HttpGet, Route("ApplyTo")]
-        public IQueryable Get(ODataQueryOptions<DataViewModel> options)
+        public IQueryable GetApplyTo(ODataQueryOptions<DataViewModel> options)
         {
             var vmData = DataContext.Data.ProjectTo<DataViewModel>(Mapper.ConfigurationProvider);
             var data = options.ApplyTo(vmData);
             var properties = Request.ODataFeature();
             return data;
+            // ArgumentException: Expression of type 'System.Object' cannot be used for parameter of type 'System.String' of method 'NETCoreSandbox.ViewModels.TranslationViewModel GetParameterValue[TranslationViewModel](Microsoft.EntityFrameworkCore.Query.QueryContext, System.String)' (Parameter 'arg1')
         }
     }
 }
