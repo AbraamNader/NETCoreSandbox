@@ -11,7 +11,7 @@ namespace NETCoreSandbox.ViewModels
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public ICollection<TranslationViewModel> Translations { get; set; }
+        public IEnumerable<TranslationViewModel> Translations { get; set; }
     }
 
     public class LanguageViewModel

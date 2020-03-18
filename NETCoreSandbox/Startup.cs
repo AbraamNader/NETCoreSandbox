@@ -64,7 +64,7 @@ namespace NETCoreSandbox
             {
                 endpoints.MapControllers();
                 endpoints.EnableDependencyInjection();
-                endpoints.Select().Filter().OrderBy().Count().MaxTop(250);
+                endpoints.Select().Filter().Expand().OrderBy().Count().MaxTop(250);
             });
         }
     }
