@@ -5,22 +5,22 @@ using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Collection;
 
-namespace NETCoreSandbox.ViewModels
+namespace NETCoreSandbox.DTO
 {
-    public class DataViewModel
+    public class DataDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<TranslationViewModel> Translations { get; set; }
+        public IEnumerable<TranslationDTO> Translations { get; set; }
     }
 
-    public class LanguageViewModel
+    public class LanguageDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
     }
 
-    public class TranslationViewModel
+    public class TranslationDTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
@@ -32,9 +32,9 @@ namespace NETCoreSandbox.ViewModels
     {
         public DataProfile()
         {
-            CreateMap<Models.Translation, TranslationViewModel>();
-            //CreateMap<List<Models.Translation>, List<TranslationViewModel>>();
-            CreateMap<Models.Data, DataViewModel>();
+            CreateMap<Models.Translation, TranslationDTO>();
+            //CreateMap<List<Models.Translation>, List<TranslationDTO>>();
+            CreateMap<Models.Data, DataDTO>();
         }
     }
 }

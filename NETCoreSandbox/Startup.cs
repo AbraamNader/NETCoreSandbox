@@ -35,7 +35,7 @@ namespace NETCoreSandbox
         {
             services.AddAutoMapper(mapper => {
                 //mapper.AddCollectionMappers();
-                mapper.AddProfile(typeof(ViewModels.DataProfile));
+                mapper.AddProfile(typeof(DTO.DataProfile));
                 //mapper.UseEntityFrameworkCoreModel<DataContext>(services);
             }, AppDomain.CurrentDomain.GetAssemblies());
 

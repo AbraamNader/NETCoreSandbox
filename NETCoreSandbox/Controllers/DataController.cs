@@ -10,7 +10,7 @@ using Microsoft.AspNet.OData.Query;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCoreSandbox.Models;
-using NETCoreSandbox.ViewModels;
+using NETCoreSandbox.DTO;
 
 namespace NETCoreSandbox.Controllers
 {
@@ -35,17 +35,17 @@ namespace NETCoreSandbox.Controllers
 
         [HttpGet("ProjectTo")]
         [EnableQuery]
-        public IQueryable<DataViewModel> GetProjectTo()
+        public IQueryable<DataDTO> GetProjectTo()
         {
-            return DataContext.Data.ProjectTo<DataViewModel>(Mapper.ConfigurationProvider);
+            return DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider);
         }
 
-        // https://localhost:44308/api/data/ViewModel?$expand=translations
-        [HttpGet("ViewModel")]
+        // https://localhost:44308/api/data/DTO?$expand=translations
+        [HttpGet("DTO")]
         [EnableQuery]
-        public IQueryable<DataViewModel> GetViewModel()
+        public IQueryable<DataDTO> GetDTO()
         {
-            return DataContext.Data.Select(x => new DataViewModel{
+            return DataContext.Data.Select(x => new DataDTO{
                 Id = x.Id,
                 Name = x.Name
             });
@@ -53,13 +53,13 @@ namespace NETCoreSandbox.Controllers
 
         // https://localhost:44308/api/data/applyto?$expand=translations
         [HttpGet, Route("ApplyTo")]
-        public IQueryable GetApplyTo(ODataQueryOptions<DataViewModel> options)
+        public IQueryable GetApplyTo(ODataQueryOptions<DataDTO> options)
         {
-            var vmData = DataContext.Data.ProjectTo<DataViewModel>(Mapper.ConfigurationProvider);
+            var vmData = DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider);
             var data = options.ApplyTo(vmData);
             var properties = Request.ODataFeature();
             return data;
-            // ArgumentException: Expression of type 'System.Object' cannot be used for parameter of type 'System.String' of method 'NETCoreSandbox.ViewModels.TranslationViewModel GetParameterValue[TranslationViewModel](Microsoft.EntityFrameworkCore.Query.QueryContext, System.String)' (Parameter 'arg1')
+            // ArgumentException: Expression of type 'System.Object' cannot be used for parameter of type 'System.String' of method 'NETCoreSandbox.DTO.TranslationDTO GetParameterValue[TranslationDTO](Microsoft.EntityFrameworkCore.Query.QueryContext, System.String)' (Parameter 'arg1')
         }
     }
 }
