@@ -40,6 +40,14 @@ namespace NETCoreSandbox.Controllers
             return DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider);
         }
 
+        // https://localhost:44308/api/data/ClientEvaluated?$filter=translations/any(f:f/name eq 'test')
+        [HttpGet("ClientEvaluated")]
+        [EnableQuery]
+        public IEnumerable<DataDTO> GetClientEvaluated()
+        {
+            return DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider).AsEnumerable();
+        }
+
         // https://localhost:44308/api/data/DTO?$expand=translations
         [HttpGet("DTO")]
         [EnableQuery]
