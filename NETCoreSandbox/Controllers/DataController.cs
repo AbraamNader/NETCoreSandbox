@@ -4,13 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
-using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Extensions;
-using Microsoft.AspNet.OData.Query;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCoreSandbox.Models;
 using NETCoreSandbox.DTO;
+using Microsoft.AspNetCore.OData.Query;
+using Microsoft.AspNetCore.OData.Extensions;
 
 namespace NETCoreSandbox.Controllers
 {
