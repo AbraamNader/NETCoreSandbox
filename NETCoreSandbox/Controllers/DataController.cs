@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Query;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NETCoreSandbox.Models;
 using NETCoreSandbox.DTO;
-using Microsoft.AspNetCore.OData.Query;
-using Microsoft.AspNetCore.OData.Extensions;
 
 namespace NETCoreSandbox.Controllers
 {
@@ -30,15 +32,16 @@ namespace NETCoreSandbox.Controllers
         {
             return DataContext.Data;
         }
-
+        // https://localhost:44308/api/data/ProjectTo?$expand=translations&$filter=translations/any(f:f/Id%20eq%202)
         [HttpGet("ProjectTo")]
         [EnableQuery]
         public IQueryable<DataDTO> GetProjectTo()
         {
-            return DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider);
+            var query = DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider);
+            return query;
         }
 
-        // https://localhost:44308/api/data/ClientEvaluated?$filter=translations/any(f:f/name eq 'test')
+        // https://localhost:44308/api/data/ClientEvaluated?$expand=translations&$filter=translations/any(f:f/Id%20eq%202)
         [HttpGet("ClientEvaluated")]
         [EnableQuery]
         public IEnumerable<DataDTO> GetClientEvaluated()
@@ -46,7 +49,7 @@ namespace NETCoreSandbox.Controllers
             return DataContext.Data.ProjectTo<DataDTO>(Mapper.ConfigurationProvider).AsEnumerable();
         }
 
-        // https://localhost:44308/api/data/DTO?$expand=translations
+        //https://localhost:44308/api/data/DTO?$expand=translations&$filter=translations/any(f:f/Id%20eq%202)
         [HttpGet("DTO")]
         [EnableQuery]
         public IQueryable<DataDTO> GetDTO()
@@ -57,7 +60,7 @@ namespace NETCoreSandbox.Controllers
             });
         }
 
-        // https://localhost:44308/api/data/applyto?$expand=translations
+        //https://localhost:44308/api/data/ApplyTo?$expand=translations&$filter=translations/any(f:f/Id%20eq%202)
         [HttpGet, Route("ApplyTo")]
         public IQueryable GetApplyTo(ODataQueryOptions<DataDTO> options)
         {

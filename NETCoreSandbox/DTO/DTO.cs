@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using AutoMapper.Collection;
+using NETCoreSandbox.Models;
 
 namespace NETCoreSandbox.DTO
 {
@@ -11,7 +13,7 @@ namespace NETCoreSandbox.DTO
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public IEnumerable<TranslationDTO> Translations { get; set; }
+        public List<TranslationDTO> Translations { get; set; }
     }
 
     public class LanguageDTO
@@ -32,9 +34,11 @@ namespace NETCoreSandbox.DTO
     {
         public DataProfile()
         {
-            CreateMap<Models.Translation, TranslationDTO>();
-            //CreateMap<List<Models.Translation>, List<TranslationDTO>>();
-            CreateMap<Models.Data, DataDTO>();
+            
+            CreateMap<Translation, TranslationDTO>().ReverseMap();
+            //CreateMap<List<Translation>, List<TranslationDTO>>().ReverseMap();
+            //CreateMap<Data, DataDTO>().ForMember(x => x.Translations, options => options.ExplicitExpansion()).ReverseMap();
+            CreateMap<Data, DataDTO>().ReverseMap();
         }
     }
 }
